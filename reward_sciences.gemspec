@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = 'reward_sciences'
-  s.version = '1.0'
-  s.summary = 'reward_sciences'
+  s.version = '0.1.0'
+  s.summary = 'Reward Sciences API Ruby client'
   s.description = 'The Reward Sciences API enables your customers to browse and redeem rewards seamlessly from your own web or mobile application.'
-  s.authors = ['APIMATIC', 'Zeeshan Ejaz Bhatti']
-  s.email = 'zeeshan@apimatic.io'
-  s.homepage = 'https://apimatic.io'
+  s.authors = ['APIMATIC', 'Zeeshan Ejaz Bhatti', 'Vero Rebagliatte']
+  s.email = 'support@rewardsciences.com'
+  s.homepage = 'https://www.rewardsciences.com'
   s.license = 'MIT'
   s.add_dependency('test-unit', '~> 3.1.5')
   s.add_dependency('unirest', '~> 1.1.2')

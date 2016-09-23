@@ -27,8 +27,11 @@ module RewardSciences
     end
 
     # Initializer with authentication and configuration parameters
-    def initialize(o_auth_access_token: nil)
+    def initialize(o_auth_access_token, environment)
+      domain = environment == 'production' ? 'rewardsciences.com' : 'rslsandbox.com'
+
       Configuration.o_auth_access_token = o_auth_access_token
+      Configuration.base_uri = "https://api.#{ domain }"
     end
   end
 end

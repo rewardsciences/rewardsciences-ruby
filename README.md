@@ -1,87 +1,71 @@
 # Getting Started
-## How to Build
 
-This client library is a Ruby gem which can be compiled and used in your Ruby and Ruby on Rails project. This library requires a few gems from the RubyGems repository.
+The Reward Sciences gem lets you integrate with our API to track activities, assign points to customers and and let them redeem rewards without leaving your application.
 
-1. Open the command line interface or the terminal and navigate to the folder containing the source code.
-2. Run ``` gem build reward_sciences.gemspec ``` to build the gem.
-3. Once built, the gem can be installed on the current work environment using ``` gem install reward_sciences-1.0.gem ```
+## Installation
 
-![Building Gem](http://apidocs.io/illustration/ruby?step=buildSDK&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-## How to Use
-
-The following section explains how to use the RewardSciences Ruby Gem in a new Rails project using RubyMine&trade;. The basic workflow presented here is also applicable if you prefer using a different editor or IDE.
-    
-#### 1. Starting a new project
-Close any existing projects in RubyMine&trade; by selecting ``` File -> Close Project ```. Next, click on ``` Create New Project ``` to create a new project from scratch.
-
-![Create a new project in RubyMine](http://apidocs.io/illustration/ruby?step=createNewProject0&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-Next, provide ``` TestApp ``` as the project name, choose ``` Rails Application ``` as the project type, and click ``` OK ```.
-
-![Create a new Rails Application in RubyMine - step 1](http://apidocs.io/illustration/ruby?step=createNewProject1&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-In the next dialog make sure that correct *Ruby SDK* is being used (minimum 2.0.0) and click ``` OK ```.
-
-![Create a new Rails Application in RubyMine - step 2](http://apidocs.io/illustration/ruby?step=createNewProject2&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-This will create a new Rails Application project with an existing set of files and folder.
-
-#### 2. Add reference of the gem
-In order to use the RewardSciences gem in the new project we must add a gem reference. Locate the ``` Gemfile	``` in the *Project Explorer* window under the ``` TestApp ``` project node. The file contains references to all gems being used in the project. Here, add the reference to the library gem by adding the following line: ``` gem 'reward_sciences', '~> 1.0' ```
-
-![Add references of the Gemfile](http://apidocs.io/illustration/ruby?step=addReference&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-
-#### 3. Adding a new Rails Controller
-Once the ``` TestApp ``` project is created, a folder named ``` controllers ``` will be visible in the *Project Explorer* under the following path: ``` TestApp > app > controllers ```. Right click on this folder and select ``` New -> Run Rails Generator... ```.
-
-![Run Rails Generator on Controllers Folder](http://apidocs.io/illustration/ruby?step=addCode0&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-Selecting the said option will popup a small window where the generator names are displayed. Here, select the ``` controller ``` template.
-
-![Create a new Controller](http://apidocs.io/illustration/ruby?step=addCode1&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-Next, a popup window will ask you for a Controller name and included Actions. For controller name provide ``` Hello ``` and include an action named ``` Index ``` and click ``` OK ```.
-
-![Add a new Controller](http://apidocs.io/illustration/ruby?step=addCode2&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-A new controller class anmed ``` HelloController ``` will be created in a file named ``` hello_controller.rb ``` containing a method named ``` Index ```. In this method, add code for initialization and a sample for its usage.
-
-![Initialize the library](http://apidocs.io/illustration/ruby?step=addCode3&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0)
-
-## How to Test
-
-You can test the generated SDK and the server with automatically generated test
-cases as follows:
-
-  1. From terminal/cmd navigate to the root directory of the SDK.
-  2. Invoke: `bundle exec rake`
-
-## Initialization
-
-#### Authentication and Initialization
-In order to setup authentication and initialization of the API client, you need the following information.
-
-| Parameter | Description |
-|-----------|-------------|
-| o_auth_access_token | The OAuth 2.0 access token to be set before API calls |
-
-
-
-API client can be initialized as following.
-
-```ruby
-# Configuration parameters and credentials
-o_auth_access_token = "o_auth_access_token"; # The OAuth 2.0 access token to be set before API calls
-
-client = RewardSciences::RewardSciencesClient.new(o_auth_access_token)
+```bash
+gem install reward_sciences
 ```
 
-The added initlization code can be debugged by putting a breakpoint in the ``` Index ``` method and running the project in debug mode by selecting ``` Run -> Debug 'Development: TestApp' ```.
+Or add it to your gemfile
 
-![Debug the TestApp](http://apidocs.io/illustration/ruby?step=addCode4&workspaceFolder=Reward Sciences-Ruby&workspaceName=RewardSciences&projectName=reward_sciences&gemName=reward_sciences&gemVer=1.0&initLine=client%20%3D%20RewardSciencesClient.new%28%27o_auth_access_token%27%29)
+```ruby
+gem 'reward_sciences'
+```
+
+## Quick Start Example
+
+1. Contact us at support@rewardsciences.com to get a test account on our sandbox environment.
+
+2. Log in to our web app and get your API token from the 'API Tokens' area available under 'Settings'.
+
+3. Define the methods you'll use accross the app
+
+  ```ruby
+  module Rewardable
+    def identify_reward_sciences_user(user)
+      session[:reward_sciences_user_id] = reward_sciences.users.identify(user.email)['id']
+    end
+
+    def track_reward_sciences_activity(activity_slug)
+      reward_sciences.activities.track(session[:reward_sciences_user_id], activity_slug)
+    end
+
+    def list_reward_sciences_rewards
+      reward_sciences.rewards.list
+    end
+
+    def show_reward_sciences_reward(reward_id)
+      reward_sciences.rewards.show(reward_id)
+    end
+
+    def redeem_reward_sciences_reward(reward_id)
+      reward_sciences.rewards.redeem(session[:reward_sciences_user_id], reward_id)
+    rescue RewardSciences::APIException => e
+      redirect_to :back, alert: e.message.split(':').last
+    end
+
+    private
+
+    def reward_sciences
+      RewardSciences::RewardSciencesClient.new(
+        Rails.application.secrets.reward_sciences_access_token,
+        Rails.application.secrets.reward_sciences_environment
+      )
+    end
+  end
+  ```
+
+4. Use the methods defined in the previous step
+
+## Sample Project
+
+Check out our [Sample Ruby on Rails project](https://github.com/rewardsciences/rewardsciences-ruby-sample).
+
+## Help
+
+If you have any questions feel free to email us at support@rewardsciences.com. We are happy to help.
 
 # Class Reference
 ## <a name="list_of_controllers"></a>List of Controllers
@@ -104,12 +88,12 @@ rewards = client.rewards
 > Bid on a reward auction.
 
 ```ruby
-def bid(user_id, 
-            reward_id, 
+def bid(user_id,
+            reward_id,
             amount); end
 ```
 
-#### Parameters: 
+#### Parameters:
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
@@ -137,12 +121,12 @@ result = rewards.bid(user_id, reward_id, amount)
 > List all the available rewards.
 
 ```ruby
-def list(category_id = nil, 
-             limit = 25, 
+def list(category_id = nil,
+             limit = 25,
              offset = 0); end
 ```
 
-#### Parameters: 
+#### Parameters:
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
@@ -170,11 +154,11 @@ result = rewards.list(category_id, limit, offset)
 > Redeem a reward.
 
 ```ruby
-def redeem(user_id, 
+def redeem(user_id,
                reward_id); end
 ```
 
-#### Parameters: 
+#### Parameters:
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
@@ -203,7 +187,7 @@ result = rewards.redeem(user_id, reward_id)
 def show(reward_id); end
 ```
 
-#### Parameters: 
+#### Parameters:
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
@@ -236,11 +220,11 @@ rewardCategories = client.reward_categories
 > List all the available reward categories.
 
 ```ruby
-def list(limit = 25, 
+def list(limit = 25,
              offset = 0); end
 ```
 
-#### Parameters: 
+#### Parameters:
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
@@ -278,7 +262,7 @@ users = client.users
 def show(user_id); end
 ```
 
-#### Parameters: 
+#### Parameters:
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
@@ -302,12 +286,12 @@ result = users.show(user_id)
 > This endpoint lets you tie a user with his/her activities. You’ll want to identify a user with any relevant information as soon as they log-in or sign-up.
 
 ```ruby
-def identify(email, 
-                 first_name = nil, 
+def identify(email,
+                 first_name = nil,
                  last_name = nil); end
 ```
 
-#### Parameters: 
+#### Parameters:
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
@@ -344,13 +328,13 @@ activities = client.activities
 > This endpoint lets you track the activities your users perform.
 
 ```ruby
-def track(user_id, 
-              activity_type, 
-              price = nil, 
+def track(user_id,
+              activity_type,
+              price = nil,
               record_id = nil); end
 ```
 
-#### Parameters: 
+#### Parameters:
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|

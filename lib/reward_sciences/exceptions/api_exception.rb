@@ -8,9 +8,21 @@ module RewardSciences
     # @param [String] The reason for raising an exception
     # @param [HttpContext] The HttpContext of the API call.
     def initialize(reason, context)
-      super(reason)
+      response = context.response
+      super("#{ reason }: #{ exception_details(response) }")
       @context = context
-	  @response_code = context.response.status_code
+      @response_code = response.status_code
+    end
+
+    private
+
+    def exception_details(response)
+      begin
+        detail = JSON.parse(response.raw_body)['detail']
+        detail.is_a?(Array) ? detail.to_sentence : detail
+      rescue JSON::ParserError
+        'Please contact support'
+      end
     end
   end
 end

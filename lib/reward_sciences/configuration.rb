@@ -2,13 +2,6 @@
 
 module RewardSciences
   class Configuration
-    # The base Uri for API calls
-    @base_uri = 'https://api.rewardsciences.com'
-
-    # The OAuth 2.0 access token to be set before API calls
-    @o_auth_access_token = 'TODO: Replace'
-
-    # create the getters and setters
     class << self
       attr_accessor :base_uri
       attr_accessor :o_auth_access_token
