@@ -13,8 +13,8 @@ module RewardSciences
     # @param [Integer] reward_id Required parameter: The ID of the reward auction to be bid on.
     # @param [String] amount Required parameter: Can be either 'max' (when max bidding) or the number of points the user wants to bid.
     # @return Mixed response from the API call
-    def bid(user_id, 
-            reward_id, 
+    def bid(user_id,
+            reward_id,
             amount)
 
       # Validate required parameters
@@ -54,7 +54,7 @@ module RewardSciences
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -80,8 +80,8 @@ module RewardSciences
     # @param [Integer] limit Optional parameter: The number of rewards you want to be retrieved.
     # @param [Integer] offset Optional parameter: The number of rewards you want to skip before starting the retrieval.
     # @return Mixed response from the API call
-    def list(category_id = nil, 
-             limit = 25, 
+    def list(category_id = nil,
+             limit = 25,
              offset = 0)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
@@ -107,7 +107,7 @@ module RewardSciences
 
       # Create the HttpRequest object for the call
       _request = @http_client.get _query_url, headers: _headers
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -132,7 +132,7 @@ module RewardSciences
     # @param [Integer] user_id Required parameter: The ID of the user who is redeeming the reward.
     # @param [Integer] reward_id Required parameter: The ID of the reward to be redeemed.
     # @return Mixed response from the API call
-    def redeem(user_id, 
+    def redeem(user_id,
                reward_id)
 
       # Validate required parameters
@@ -169,7 +169,7 @@ module RewardSciences
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
@@ -222,7 +222,7 @@ module RewardSciences
 
       # Create the HttpRequest object for the call
       _request = @http_client.get _query_url, headers: _headers
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 

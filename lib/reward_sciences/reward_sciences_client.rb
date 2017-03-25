@@ -20,6 +20,12 @@ module RewardSciences
       Users.instance
     end
 
+    # Singleton access to sub_merchants controller
+    # @return [SubMerchants] Returns the controller instance
+    def sub_merchants
+      SubMerchants.instance
+    end
+
     # Singleton access to activities controller
     # @return [Activities] Returns the controller instance
     def activities
@@ -28,10 +34,13 @@ module RewardSciences
 
     # Initializer with authentication and configuration parameters
     def initialize(o_auth_access_token, environment)
-      domain = environment == 'production' ? 'rewardsciences.com' : 'rslsandbox.com'
-
       Configuration.o_auth_access_token = o_auth_access_token
-      Configuration.base_uri = "https://api.#{ domain }"
+
+      Configuration.base_uri = if environment == 'production'
+        'https://api.rewardsciences.com'
+      else
+        'http://api.rs.dev'
+      end
     end
   end
 end

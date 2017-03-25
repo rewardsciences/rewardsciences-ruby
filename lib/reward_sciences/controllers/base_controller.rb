@@ -11,7 +11,7 @@ module RewardSciences
       @http_call_back = http_call_back
     end
 
-    def validate_response(context)			
+    def validate_response(context)
       if context.response.status_code == 400
         raise APIException.new "400 - Bad Request", context
       elsif context.response.status_code == 401

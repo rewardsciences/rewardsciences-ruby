@@ -14,9 +14,9 @@ module RewardSciences
     # @param [Integer] price Optional parameter: The price related to the activity, if any. Expressed in USD
     # @param [String] record_id Optional parameter: The ID for the record associated with the activity in your database.
     # @return Mixed response from the API call
-    def track(user_id, 
-              activity_type, 
-              price = nil, 
+    def track(user_id,
+              activity_type,
+              price = nil,
               record_id = nil)
 
       # Validate required parameters
@@ -51,7 +51,7 @@ module RewardSciences
 
       # Create the HttpRequest object for the call
       _request = @http_client.post _query_url, headers: _headers
-      
+
       # Call the on_before_request callback
       @http_call_back.on_before_request(_request) if @http_call_back
 
