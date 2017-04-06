@@ -32,6 +32,12 @@ module RewardSciences
       Activities.instance
     end
 
+    # Singleton access to campaigns controller
+    # @return [Campaigns] Returns the controller instance
+    def campaigns
+      Campaigns.instance
+    end
+
     # Initializer with authentication and configuration parameters
     def initialize(o_auth_access_token, environment)
       Configuration.o_auth_access_token = o_auth_access_token
