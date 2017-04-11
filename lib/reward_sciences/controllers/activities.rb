@@ -13,12 +13,7 @@ module RewardSciences
     # @param [Integer] limit Optional parameter: The number of activities you want to be retrieved.
     # @param [Integer] offset Optional parameter: The number of activities you want to skip before starting the retrieval.
     # @return Mixed response from the API call
-    def list(user_id, limit = 25, offset = 0)
-      # Validate required parameters
-      if user_id == nil
-        raise ArgumentError.new "Required parameter 'user_id' cannot be nil."
-      end
-
+    def list(user_id = nil, limit = 25, offset = 0)
       # the base uri for api requests
       _query_builder = Configuration.base_uri.dup
 
