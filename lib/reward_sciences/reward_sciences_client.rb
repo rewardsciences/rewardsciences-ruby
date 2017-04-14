@@ -38,6 +38,12 @@ module RewardSciences
       Campaigns.instance
     end
 
+    # Singleton access to stats controller
+    # @return [Stats] Returns the controller instance
+    def stats
+      Stats.instance
+    end
+
     # Initializer with authentication and configuration parameters
     def initialize(o_auth_access_token, environment)
       Configuration.o_auth_access_token = o_auth_access_token
