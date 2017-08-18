@@ -65,10 +65,12 @@ module RewardSciences
     # @param [String] email Required parameter: The user's email address
     # @param [String] first_name Optional parameter: The user's first name
     # @param [String] last_name Optional parameter: The user's last name
+    # @param [String] job_title Optional parameter: The user's job title
     # @return Mixed response from the API call
     def identify(email, 
                  first_name = nil, 
-                 last_name = nil)
+                 last_name = nil,
+                 job_title = nil)
 
       # Validate required parameters
       if email == nil
@@ -85,7 +87,8 @@ module RewardSciences
       _query_builder = APIHelper.append_url_with_query_parameters _query_builder, {
         'email' => email,
         'first_name' => first_name,
-        'last_name' => last_name
+        'last_name' => last_name,
+        'job_title' => job_title
       }
 
       # validate and preprocess url
